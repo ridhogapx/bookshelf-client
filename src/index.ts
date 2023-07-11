@@ -2,7 +2,7 @@
 import express ,{ Express, Request, Response } from "express"
 
 // Proto Path
-const PROTO_PATH = __dirname 
+const PROTO_PATH = __dirname + '../proto/owner.proto'
 
 // Initialize Express
 const app: Express = express()
@@ -15,8 +15,6 @@ app.get("/", (req: Request, res: Response): void => {
     })
 })
 
-// Test logging
-console.log(PROTO_PATH)
 
 app.listen(port, (): void => {
     console.log(`Server is running on port ${port}`)
