@@ -1,0 +1,27 @@
+{
+  "name": "bookshelf-rpcclient",
+  "version": "1.0.0",
+  "description": "RPC Client for Bookshelf API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/RageNeko26/bookshelf-client.git"
+  },
+  "keywords": [
+    "grpc",
+    "rpc",
+    "microservice"
+  ],
+  "author": "RidhoGAPX",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RageNeko26/bookshelf-client/issues"
+  },
+  "homepage": "https://github.com/RageNeko26/bookshelf-client#readme",
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  }
+}
