@@ -1,4 +1,8 @@
+// Express and its types
 import express ,{ Express, Request, Response } from "express"
+
+// Proto Path
+const PROTO_PATH = __dirname 
 
 // Initialize Express
 const app: Express = express()
@@ -10,6 +14,9 @@ app.get("/", (req: Request, res: Response): void => {
         message : "Welcome to RPC Client!"
     })
 })
+
+// Test logging
+console.log(PROTO_PATH)
 
 app.listen(port, (): void => {
     console.log(`Server is running on port ${port}`)
