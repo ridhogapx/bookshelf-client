@@ -10,7 +10,7 @@ const grpc = require("@grpc/grpc-js")
 const protoLoader = require("@grpc/proto-loader")
 
 // Proto Path
-const PROTO_PATH = path.resolve(__dirname, "../proto/owner.proto")
+const PROTO_PATH = path.resolve(__dirname, "../../proto/owner.proto")
 
 // Initialize Express
 const app: Express = express()
@@ -54,8 +54,6 @@ app.get("/owner", (req: Request, res: Response): void => {
     
         res.json(resRPC)
     })
-
-   
 })
 
 app.listen(port, (): void => {
