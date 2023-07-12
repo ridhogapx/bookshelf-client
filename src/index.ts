@@ -16,6 +16,25 @@ const port: number = 8080
 // Initialize RPC Client
 const client = new GRPCClient(PROTO_PATH, "owner", "OwnerService", 50051 )
 
+interface ArgOwner {
+    Id: string,
+    Name: string
+}
+
+const newOwner: ArgOwner = {
+    Id: "5",
+    Name: "foo"
+}
+
+client.runService('CreateOwner', newOwner, (err: any, res: any) => {
+    if (err) {
+        console.log(err)
+        return
+    }
+
+    console.log(res)
+})
+
 // Test Route
 app.get("/", (req: Request, res: Response): void => {
     res.json({
