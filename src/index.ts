@@ -13,6 +13,9 @@ const PROTO_PATH = path.resolve(__dirname, "../proto/owner/proto")
 const app: Express = express()
 const port: number = 8080
 
+// Initialize RPC Client
+const client = new GRPCClient(PROTO_PATH, "owner", "OwnerService", 50051 )
+
 // Test Route
 app.get("/", (req: Request, res: Response): void => {
     res.json({
