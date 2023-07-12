@@ -56,6 +56,6 @@ app.get("/", (req: Request, res: Response): void => {
 
 
 app.listen(port, (): void => {
-    console.log("Server is running on port ${port}")
+    console.log(`Server is running on port ${port}`)
 })
 
