@@ -21,11 +21,13 @@ interface ArgOwner {
     Name: string
 }
 
+// Argument
 const newOwner: ArgOwner = {
     Id: "5",
     Name: "foo"
 }
 
+// Running service
 client.runService('CreateOwner', newOwner, (err: any, res: any) => {
     if (err) {
         console.log(err)
