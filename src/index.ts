@@ -4,17 +4,35 @@ import express ,{ Express, Request, Response } from "express"
 const path = require("path")
 
 // GRPC Client
-const GRPCClient = require('@grpc/grpc-js')
+const grpc = require("@grpc/grpc-js")
+
+// Proto loader
+const protoLoader = require("@grpc/proto-loader")
 
 // Proto Path
-const PROTO_PATH = path.resolve(__dirname, "../proto/owner/proto")
+const PROTO_PATH = path.resolve(__dirname, "../proto/owner.proto")
 
 // Initialize Express
 const app: Express = express()
 const port: number = 8080
 
-// Initialize RPC Client
-const client = new GRPCClient(PROTO_PATH, "owner", "OwnerService", 50051 )
+// Options RPC
+const options = {
+    keepCase: true,
+    longs: String,
+    enums: String,
+    defaults: true,
+    oneofs: true,
+  }
+
+const packageDefinition = protoLoader.loadSync(PROTO_PATH, options)
+const proto = grpc.loadPackageDefinition(packageDefinition).proto
+
+// Client RPC
+const client = new proto.OwnerService(
+    "localhost:50051",
+    grpc.credentials.createInsecure()
+) 
 
 interface ArgOwner {
     id: string,
@@ -27,12 +45,8 @@ const newOwner: ArgOwner = {
     name: "foo"
 }
 
-// Running service
-client.runService('CreateOwner', newOwner, (err: any, res: any) => {
-    if (err) {
-        console.log(err)
-        return
-    }
+client.CreateOwner(newOwner, (err: any, res: any) => {
+    if (err) throw(err)
 
     console.log(res)
 })
