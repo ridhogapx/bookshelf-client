@@ -1,8 +1,13 @@
 // Express and its types
 import express ,{ Express, Request, Response } from "express"
 
+const path = require("path")
+
+// GRPC Client
+const GRPCClient = require('node-grpc-client')
+
 // Proto Path
-const PROTO_PATH = __dirname + '../proto/owner.proto'
+const PROTO_PATH = path.resolve(__dirname, "../proto/owner/proto")
 
 // Initialize Express
 const app: Express = express()
@@ -17,6 +22,6 @@ app.get("/", (req: Request, res: Response): void => {
 
 
 app.listen(port, (): void => {
-    console.log(`Server is running on port ${port}`)
+    console.log("Server is running on port ${port}")
 })
 
