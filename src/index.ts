@@ -4,7 +4,7 @@ import express ,{ Express, Request, Response } from "express"
 const path = require("path")
 
 // GRPC Client
-const GRPCClient = require('node-grpc-client')
+const GRPCClient = require('@grpc/grpc-js')
 
 // Proto Path
 const PROTO_PATH = path.resolve(__dirname, "../proto/owner/proto")
@@ -17,14 +17,14 @@ const port: number = 8080
 const client = new GRPCClient(PROTO_PATH, "owner", "OwnerService", 50051 )
 
 interface ArgOwner {
-    Id: string,
-    Name: string
+    id: string,
+    name: string
 }
 
 // Argument
 const newOwner: ArgOwner = {
-    Id: "5",
-    Name: "foo"
+    id: "5",
+    name: "foo"
 }
 
 // Running service
