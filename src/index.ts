@@ -39,13 +39,7 @@ interface ArgOwner {
     name: string
 }
 
-// Argument
-const newOwner: ArgOwner = {
-    id: "5",
-    name: "foo"
-}
-
-client.CreateOwner(newOwner, (err: any, res: any) => {
+client.GetOwners({}, (err: any, res: any) => {
     if (err) throw(err)
 
     console.log(res)
