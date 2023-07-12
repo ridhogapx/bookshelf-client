@@ -34,12 +34,14 @@ const client = new proto.OwnerService(
     grpc.credentials.createInsecure()
 ) 
 
-interface ArgOwner {
+interface Owner {
     id: string,
     name: string
 }
 
-client.GetOwners({}, (err: any, res: any) => {
+type Owners = Owner[]
+
+client.GetOwners({}, (err: string, res: Owners) => {
     if (err) throw(err)
 
     console.log(res)
