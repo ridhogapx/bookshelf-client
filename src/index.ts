@@ -41,12 +41,6 @@ interface Owner {
 
 type Owners = Owner[]
 
-client.GetOwners({}, (err: string, res: Owners) => {
-    if (err) throw(err)
-
-    console.log(res)
-})
-
 // Test Route
 app.get("/", (req: Request, res: Response): void => {
     res.json({
@@ -54,6 +48,15 @@ app.get("/", (req: Request, res: Response): void => {
     })
 })
 
+app.get("/owner", (req: Request, res: Response): void => {
+    client.GetOwners({}, (err: string, resRPC: Owners) => {
+        if (err) throw(err)
+    
+        res.json(resRPC)
+    })
+
+   
+})
 
 app.listen(port, (): void => {
     console.log(`Server is running on port ${port}`)
