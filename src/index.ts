@@ -1,60 +1,12 @@
 // Express and its types
-import express ,{ Express, Request, Response } from "express"
-
-const path = require("path")
-
-// GRPC Client
-const grpc = require("@grpc/grpc-js")
-
-// Proto loader
-const protoLoader = require("@grpc/proto-loader")
-
-// Proto Path
-const PROTO_PATH = path.resolve(__dirname, "../../proto/owner.proto")
+import express ,{ Express } from "express"
+import { AllOwners } from "./controller/owner_controller"
 
 // Initialize Express
 const app: Express = express()
 const port: number = 8080
 
-// Options RPC
-const options = {
-    keepCase: true,
-    longs: String,
-    enums: String,
-    defaults: true,
-    oneofs: true,
-  }
-
-const packageDefinition = protoLoader.loadSync(PROTO_PATH, options)
-const proto = grpc.loadPackageDefinition(packageDefinition).proto
-
-// Client RPC
-const client = new proto.OwnerService(
-    "localhost:50051",
-    grpc.credentials.createInsecure()
-) 
-
-interface Owner {
-    id: string,
-    name: string
-}
-
-type Owners = Owner[]
-
-// Test Route
-app.get("/", (req: Request, res: Response): void => {
-    res.json({
-        message : "Welcome to RPC Client!"
-    })
-})
-
-app.get("/owner", (req: Request, res: Response): void => {
-    client.GetOwners({}, (err: string, resRPC: Owners) => {
-        if (err) throw(err)
-    
-        res.json(resRPC)
-    })
-})
+app.get("/owner", AllOwners)
 
 app.listen(port, (): void => {
     console.log(`Server is running on port ${port}`)
