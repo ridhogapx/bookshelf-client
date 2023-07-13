@@ -27,3 +27,5 @@ const client = new proto.OwnerService(
     "localhost:50051",
     grpc.credentials.createInsecure()
 )
+
+export default client
